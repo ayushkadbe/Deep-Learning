@@ -1,0 +1,293 @@
+Gradient Descent
+Gradient descent is an optimization algorithm which is commonly-used to train machine learning models and neural networks. It trains machine learning models by minimizing errors between predicted and actual results.
+
+cost or loss function:
+One common cost or loss function is the
+one shown here as J, where we take the
+difference between the z values and the
+product of w and x's. We square that and
+we sum the squared difference across all
+values of z and x. The best value of w
+would then be the value that results in
+the minimum value of this cost or loss
+function. 
+
+
+What makes this loss or cost function
+attractive is that it is a parabola, and
+has one global minimum or one unique
+solution. For the given data, the value of
+w that makes this cost function minimum,
+is w equals 2, meaning z equals 2x, which
+would result in a line that fits the point perfectly.
+
+Gradient Descent is a iterative optimization algorithm to find the 
+to find the minimum of a function. one takes steps proportional to
+the negative of the gradient of the
+function at the current point.
+
+Given:
+N vs X Graph: Linear
+J(w) vs w Graph: Parabola from 0.7 to 0.0 to 0.7
+
+J(w) = 1/2m * m sigma i=1 * (zi -wxi)^2
+
+each iteration of J(w), linear line is also changed.
+Relation: The lower the value of J(w), more the value of w, 
+more the linear line optimized with each w close to find perfect fit on linear graph with least J(W) value = 0.0.
+
+
+What does that mean? We start at a random
+initial value of w. Let's call it w0,
+and say it's equal to 0.2, and
+we start taking steps towards the green
+dot which is w = 2. To determine
+in which direction to move, we compute
+the gradient of the loss function at the
+current value of w, which is 0.2.
+The gradient is given by the slope
+of the tangent at w = 0.2,
+and then the magnitude of the step
+is controlled by a parameter called the
+learning rate. The larger the learning
+rate, the bigger the step we take, and the
+smaller the learning rate, the smaller
+the step we take. Then we take the step
+and we move to w1. w1 is essentially
+computed as w0 minus the learning rate
+times the gradient at w0. This
+represents the first iteration of the
+algorithm. At w1, we repeat the same
+process of computing the gradient at w1
+and using the same learning rate to
+control the magnitude of the step
+towards the minimum. We keep repeating
+this step again and again until we hit
+the minimum or a value of the cost
+function that is very close to the
+minimum, within a very small predefined
+threshold. Now when choosing the learning
+rate, we have to be very careful as a
+large learning rate can lead to big
+steps and eventually missing the minimum.
+On the other hand, a small learning rate
+can result in very small steps and
+therefore causing the algorithm to take
+a long time to find the minimum point.
+Now let's see how each iteration with a
+learning rate of 0.4 affects the way the
+resulting line fits the data on the left.
+We initialize w to 0, which means z
+equals 0.
+It is a horizontal line and therefore the
+cost is high and the line as you can
+see is a bad fit. After the 1st
+iteration, w moves closer to 2 and
+because the slope is very steep at w=0,
+the new value of w results in a
+big drop in the loss function.
+The resulting line fits better than the
+initial one but there is still room for
+improvement. After the 2nd iteration, w
+continues moving toward w = 2.
+Because the slope is not as steep as
+before, the step is not as big but the
+cost function still drops in value and
+the resulting line is moving closer to
+the ideal best fit line. The same
+observation is noted with the 3rd
+iteration, and the 4th iteration. After
+4 iterations, you can see how we are
+almost there at w = 2, and the
+resulting line almost fits the
+scatterplot perfectly. With each
+iteration, the weight is updated in a way
+that's proportional to the negative of
+the gradient of the function at the
+current point. Therefore, if you
+initialize the weight to a value that is to
+the right of the minimum, then the
+positive gradient will result in w
+moving to the left towards the minimum.
+Now that we understand how to optimize a
+parameter that a function depends on,
+we are now ready to start learning about
+backpropagation and how neural networks
+learn and optimize their weights and
+biases.
+
+=======================================
+BackPropagation
+
+How do neural networks train and optimize their weights and biases for a given
+problem and data set?
+
+Supervised learning is done using labelled data.
+
+Training is needed when Prediction are not accurate or does not match with ground truth T
+
+x ---w1---(z1=x1.w1. + b1)---a1 = w2---(a1.w2 + b2)---a2
+
+T: Ground Truth
+T << a2
+
+TRAINING PROCESS:
+----------------
+1) calculating the error 
+E between the predicted values and the
+ground truth labels. This error now
+represents the cost or the loss function
+that we discussed in the gradient
+descent video. 
+
+E = 1/2(T-a2)^2
+
+Error is calculate as mean squarred error because network is trained using thousands of data points not just 2 neurons.
+
+E = 1/2m * m--Σ(sigma)--i=1 * (Ti - a2,i)^2
+
+Update w2, b2, w1, and b1.
+
+w2 -> w2 - n.aE/aw2
+
+Error is not a explit function of above equation, thus we we use Chain Rule to establish the derivativ of error with respect to w2.
+
+E is function of a2. => Take derivative of E wrt to a2.
+a2 is function of z2 => Take derivate of a2 wrt to z2 
+z2 is function of w2. => Take derivative of z2 wrt to w2.
+
+E= 1/2(T -a2)^2   ==> aE/aa2
+a2 = f(z2) = 1/1+e^-z2  ==> aa2/az2
+z2 = a.w2+b2      ==> az2/aw2
+
+Derivative/Deferentiation
+ae/aw2 = (ae/aa2) * (aa2/az2) * (az2/aw2)
+= (-(T-a2)).(a2(1-a2)).(a1)
+
+Similarly for b2
+b2 -> b2 - n.aE/ab2
+= (-(T-a2)).(a2(1-a2)).1
+
+Using chain rule for w1
+w1 -> w1 - n.aE/aw1
+ae/aw1 = (ae/aa2) * (aa2/az2) * (az2/aa1) * (aa1/az1) * (az1/aw1)
+= (-(T-a2)).(a2(1-a2)).(w2).a1(1-a1).x1
+
+Similarly for b1
+b1 -> b1 - n.aE/ab1
+ae/ab1 = (ae/aa2) * (aa2/az2) * (az2/aa1) * (aa1/az1) * (az1/ab1)
+= (-(T-a2)).(a2(1-a2)).(w2).a1(1-a1).1
+
+
+2) Therefore, the next step
+
+would be to propagate this error back
+
+into the network and use it to perform
+
+gradient descent on the different
+
+weights and biases in the network, to
+
+optimize them using the same equations
+
+that we saw in the gradient descent
+
+video.
+
+wi -> wi - n.aE/awi
+bi -> bi - n.aE/abi
+
+we will start updating the weights
+
+and biases for either a predefined
+
+number of iterations or epochs, like
+
+1,000 for example, or until the error is
+
+within a predefined threshold of 0.001
+
+for example. Using a learning rate of
+
+0.4,
+
+
+COMPLE TRAINING ALGORITHM
+=========================
+1. Initialize weights and biases
+2. Interativel repeat the following steps
+ a) Calculate network output using forward propogation
+ b) Calculate error between ground truth T and estimated/predicted output
+ c) Update weights and biases through backpropagation
+ d) Repeat a,b,c until Number of Interation/epochs is reached OR error between ground truth and predicted output is below a predefined threshold.
+
+VANISHING GRADIENT PROBLEM
+===========================
+Sigmoid Activation Function is used as Activation Function, all the values in the network are between 0 and 1.
+
+So when we do backpropagation, we keep
+multiplying factors that are less than 1
+by each other, and so their gradients
+tend to get smaller and smaller as we
+keep on moving backward in the network.
+This means that the neurons in the
+earlier layers learn very slowly as
+compared to the neurons in the later
+layers in the network. The earlier layers
+in the network are the slowest to train.
+The result is a training process that
+takes too long and a prediction
+accuracy that is compromised. Accordingly,
+this is the reason why we do not use the
+sigmoid function or similar functions as
+activation functions, since they are
+prone to the vanishing gradient problem.
+
+ACTIVATION FUNCTION
+====================
+OTHER ACTIVATION FUNCTION WHICH DON'T CAUSE VANISHING GRADIENT PROBLEM.
+
+ones that are more efficient
+to use and are more applicable to deep
+learning applications. 
+
+There are seven types of activation functions that you can use when building a neural network.
+There is the 
+* binary step function, 
+* the linear or identity function, 
+* there is our old friend the sigmoid or logistic function, 
+* there is the hyperbolic tangent,
+or tanh, function, 
+* the rectified linear
+unit (ReLU) function, ==Most widely used , doesn' activate all functions at same time
+* the leaky ReLU
+function, 
+* and the softmax function. The softmax function is ideally used in
+the output layer of the classifier where
+we are actually trying to get the
+probabilities to define the class of
+each input. So, if a network with 3
+neurons in the output layer outputs [1.6, 0.55, 0.98]
+then with a softmax activation
+function, the outputs get converted to
+[0.51, 0.18, 0.31]. 
+
+ In conclusion, the sigmoid and
+the tanh functions are avoided in many
+applications nowadays since they can
+lead to the vanishing gradient problem.
+The ReLU function is the function
+that's widely used nowadays, and it's
+important to note that it is only used in
+the hidden layers. Finally, when building
+a model, you can begin with using the
+ReLU function and then you can switch to
+other activation functions if the
+ReLU function does not yield a good
+performance. And this concludes this
+video on activation functions I'll see
+you in the next video.
+
+VANISHING GRADIENT
+===================

@@ -1,0 +1,138 @@
+Identify the difference between the shallow and deep neural networks.
+Describe Convolutional Neural Networks (CNN).
+Build CNNs using the Keras library.
+Define Recurrent Neural Networks (RNN).
+Describe autoencoders and their functions.
+
+CNN & RNN(LTSM: Specialized RNN)are Supervised Deep Learning Network Models
+Autoencoder is Unsupervised Deep Learning Network Model
+
+Shallow Neural Network
+* 1 hidden layer
+* input: vectors only
+
+Deep Neural Network
+* Multiple hidden layer, multiple neurons in each hidden layer
+* input: raw data like Images and Texts
+
+Convolutional Neural Networks
+* similar to typical neural network
+* just takes Images as input
+* Therefore, CNNs are best for
+solving problems related to image
+recognition, object detection, and other
+computer vision applications. 
+
+CNN Architecture
+Input: Image > Convolution Layer > Pooling Layer > Convolution Layer > Pooling Layer > Fully Connected Layer > Output
+
+* The input to a convolutional
+neural network, on the other hand, is
+mostly an (n x m x 1) for grayscale images
+or an (n x m x 3) for colored images,
+where the number 3 represents the
+red, green, and blue components of each pixel
+in the image. 
+
+* In the convolutional layer,
+we basically define filters and we
+compute the convolution between the
+defined filters and each of the three
+images. 
+
+* would we need to use convolution? Why not
+flatten the input image into an (n x m) x 1
+vector and use that as our input?
+Well, if we do that, we will end up with a
+massive number of parameters that will
+need to be optimized, and it will be
+super computationally expensive. Also,
+decreasing the number of parameters
+would definitely help in preventing the
+model from overfitting the training data.
+
+* The pooling layer's main
+objective is to reduce the spatial
+dimensions of the data propagating
+through the network. There are two types
+of pooling that are widely used in
+convolutional neural networks. Max-
+pooling and average pooling. 
+> In max-pooling
+which is the most common of the
+two, for each section of the image we scan
+we keep the highest value, like so.
+Here our filter is moving two strides at
+a time.
+> Similarly, with average pooling, we
+compute the average of each area we scan.
+In addition to reducing the dimension of
+the data, pooling, or max pooling in
+particular, provides spatial variance
+which enables the neural network to
+recognize objects in an image even if
+the object does not exactly resemble the
+original object.
+
+* Finally, in the fully
+connected layer, we flatten the output
+of the last convolutional layer and
+connect every node of the current layer
+with every other node of the next layer.
+This layer basically takes as input the
+output from the preceding layer, whether
+it is a convolutional layer, ReLU, or
+pooling layer, and outputs an n-dimensional
+vector, where n is the number
+of classes pertaining to the problem at
+hand. 
+
+* For example, if you are building a
+network to classify images of digits, the
+dimension n would be 10, since there are
+10 digits. You will be covering
+convolutional neural networks in much
+more details in the other courses in this
+specialization, but this information is
+more than enough to give you a general
+understanding of convolutional neural
+networks. Now let's see how we can use
+the Keras library to build a
+convolutional neural network. Here I will
+show you how you can use the Keras
+library to build a convolutional neural
+network. 
+
+
+Recurrent Neural Networks
+-------------------------
+
+Conventional/Traditional NN see datapoints as independent instances.
+
+Recurrent neural networks or (RNNs)
+for short, are networks with loops that don't just take a new input at a time,
+but also take in as input the output from the previous dat point that was fed
+into the network. Accordingly, this is how the architecture of a recurrent neural
+network would look like.
+
+At time t = 0, the network takes in input x0 and outputs a0. Then, at time t = 1,
+in addition to the input x1, the network also takes a0 as input,
+weighted with weight w0,1, and so on and so forth. 
+
+As a result, recurrent neural networks are very good at modelling patterns and sequences of data, such as
+texts, genomes, handwriting, and stock markets. These algorithms take time and
+sequence into account, which means that they have a temporal dimension. 
+
+A very popular type of recurrent neural network is the long short-term memory model or
+the (LSTM) model for short. It has been successfully used for many applications
+including image generation, where a model trained on many
+images is used to generate new novel images. 
+
+Another application is handwriting generation, which I described in the welcome video of this course. Also
+LSTM models have been successfully used to build algorithms that can
+automatically describe images as well as streams of videos.
+
+
+Autoencoder: Unsupervised Deeplearning network model
+----------------------------------------------------
+

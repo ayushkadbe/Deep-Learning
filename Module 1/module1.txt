@@ -1,0 +1,75 @@
+Color Restoration of images
+
+Speech Reenactment (Lip Sync) Audio to New Video, Video to New Video
+
+Automatic Handwriting Generation
+
+Automatic Machine Translation: Translate Text in Image in realtime
+
+Automatic adding sound to silent movies
+
+Object Classification & Image Detectection
+
+Self Driving Cars
+
+====================
+BRAIN NEURON WORKING
+
+
+Dendrites-Soma-Axon.
+Input-Process-Output
+
+Axon is connected to multiple Dendrites.
+
+Output of Axon is Input to multiple dendrites.
+======================
+ARTIFICIAL NEURAL NETWORK
+
+
+For a network of neurons, we
+normally divide it into different layers:
+1) first layer that feeds the input into the network is obviously called the input layer. 
+2) The set of nodes that
+provide the output of the network is
+called the output layer.
+3) And any sets of nodes in between the input and the output layers are called the hidden
+layers. When working with neural networks,
+
+
+the three main topics that we deal with
+are: 
+* forward propagation, * backpropagation,
+* and activation functions.
+
+
+===========================
+FORWARD PROPAGATION
+
+Forward propagation is the process through which data passes through layers of 
+neurons in a neural network from the input layer all the way to the output layer. 
+
+Let's use one neuron and mathematically formulate the way information flows through it.
+
+As shown here, the data flows through each neuron by connections or
+the dendrites. Every connection has a specific weight by which the flow of
+data is regulated.
+
+Neuron below:
+x1 -----w1-------- 
+		z = x1.w1 + x2.w2 + b1    =>> a = output = z
+x2------w2--------
+
+Explanation:
+Here x1 and x2 are the two inputs, they could be an integer or float. When these inputs pass through the
+connections, they're adjusted depending
+on the connection weights, w1 and w2.
+
+The neuron then processes this information by outputting a weighted sum
+of these inputs. It also adds a constant to the sum which is referred to as the bias b1. 
+
+So, z here is the linear combination of the inputs and weights along with the bias, and a is the output
+of the network.
+==================
+Activation function
+
+The activation function of a node in an artificial neural network is a function that calculates the output of the node based on its individual inputs and their weights.
